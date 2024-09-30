@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchTrendingMovies } from "../../services/api";
-import s from "./TrendingMoviesList.module.css";
+import s from "./MovieList.module.css";
 import Loader from "../Loader/Loader";
 
-const TrendingMoviesList = () => {
+const MovieList = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -27,7 +27,7 @@ const TrendingMoviesList = () => {
     fetchMovies();
   }, []);
   return (
-    <>
+    <div className={s.trendingMoviesWrapper}>
       <h2 className={s.title}>Trending Today</h2>
       {isLoading && <Loader />}
 
@@ -38,14 +38,14 @@ const TrendingMoviesList = () => {
             // id={trendingMovie.id}
             className={s.movieItem}
           >
-            <Link to={trendingMovie.id.toString()}>
+            <Link to={`/movies/${trendingMovie.id.toString()}`}>
               <p>{trendingMovie.title}</p>
             </Link>
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 
-export default TrendingMoviesList;
+export default MovieList;

@@ -1,28 +1,64 @@
+.pageWrapper {
+  padding: 20px 55px 55px 55px;
+}
+
 .returnBtn {
+  border-radius: 5px;
+  padding: 7px;
+  background-color: #8c587d;
   display: block;
-  margin-left: 55px;
+  margin-bottom: 80px;
+
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.infoWrapper {
-  padding: 55px;
-  display: flex;
-  gap: 30px;
-}
-
-.moviePoster {
-  border-radius: 7px;
-  width: 400px;
-  height: auto;
+.returnBtn:hover {
+  border: 1px solid #eea3a1;
+  color: #eea3a1;
 }
 
 .movieDetailsWrapper {
-  width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  position: relative;
+  /* height: 80vh; */
+  background-color: #fff;
+  box-shadow: 0px 4px 24px -9px rgba(66, 68, 90, 1);
+  padding: 35px;
+}
+
+.infoWrapper {
+  display: flex;
+  gap: 50px;
+}
+
+.imgWrapper {
+  padding-bottom: 55px;
+  width: 450px;
+  height: 450px;
+}
+
+.moviePoster {
+  position: absolute;
+  left: 35px;
+  top: -50px;
+  border-radius: 7px;
+  width: 350px;
+  height: auto;
+  box-shadow: 0px 4px 24px 2px rgba(66, 68, 90, 1);
+}
+
+.movieDetails {
+  width: 450px;
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
 .movieTitle {
+  color: #493129;
   font-size: 30px;
 }
 
@@ -32,6 +68,7 @@
 .genresList {
   display: flex;
   gap: 5px;
+  margin-bottom: 45px;
 }
 
 .genreItemName::after {
@@ -40,4 +77,27 @@
 
 .genreItemName:last-child::after {
   content: "";
+}
+
+.additionalInfoLinks {
+  display: flex;
+  flex-direction: column;
+}
+
+.links {
+  display: flex;
+  gap: 10px;
+}
+
+.link {
+  color: black;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link:hover {
+  color: #eea3a1;
+}
+
+.active {
+  color: #eea3a1;
 }

@@ -20,3 +20,15 @@ export const fetchMovieById = async (movieId) => {
   const { data } = await axios.get(movieByIdUrl, options);
   return data;
 };
+
+export const fetchMovieCastById = async (movieId) => {
+  const movieCastUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits`;
+  const { data } = await axios.get(movieCastUrl, options);
+  return data.cast;
+};
+
+export const fetchMovieReviewsById = async (movieId) => {
+  const movieReviewUrl = `https://api.themoviedb.org/3/movie/${movieId}/reviews`;
+  const { data } = await axios.get(movieReviewUrl, options);
+  return data.results;
+};
