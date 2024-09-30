@@ -1,0 +1,43 @@
+.returnBtn {
+  display: block;
+  margin-left: 55px;
+}
+
+.infoWrapper {
+  padding: 55px;
+  display: flex;
+  gap: 30px;
+}
+
+.moviePoster {
+  border-radius: 7px;
+  width: 400px;
+  height: auto;
+}
+
+.movieDetailsWrapper {
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.movieTitle {
+  font-size: 30px;
+}
+
+.userScore {
+}
+
+.genresList {
+  display: flex;
+  gap: 5px;
+}
+
+.genreItemName::after {
+  content: ",";
+}
+
+.genreItemName:last-child::after {
+  content: "";
+}

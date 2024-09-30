@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://api.themoviedb.org/3/trending/movie/day";
+const trendingMoviesUrl = "https://api.themoviedb.org/3/trending/movie/day";
 
 const options = {
   headers: {
@@ -11,6 +11,12 @@ const options = {
 };
 
 export const fetchTrendingMovies = async () => {
-  const { data } = await axios.get(url, options);
+  const { data } = await axios.get(trendingMoviesUrl, options);
   return data.results;
+};
+
+export const fetchMovieById = async (movieId) => {
+  const movieByIdUrl = `https://api.themoviedb.org/3/movie/${movieId}`;
+  const { data } = await axios.get(movieByIdUrl, options);
+  return data;
 };
