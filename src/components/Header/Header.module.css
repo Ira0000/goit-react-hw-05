@@ -1,0 +1,18 @@
+header {
+  padding: 20px;
+  background-color: #8c587d;
+  margin-bottom: 25px;
+}
+
+.nav {
+  display: flex;
+  gap: 25px;
+}
+
+.link {
+  color: #eea3a1;
+}
+
+.active {
+  color: #ffdec7;
+}

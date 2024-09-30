@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+  font-family: "Playwrite DE Grund", sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: #ffeddd;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+}
