@@ -18,6 +18,9 @@ const MovieDetailsPage = () => {
   const [isError, setIsError] = useState(false);
   const location = useLocation();
 
+  const defaultImg =
+    "https://dummyimage.com/400x600/cdcdcd/000.jpg&text=No+poster";
+
   useEffect(() => {
     const fetchMovie = async () => {
       try {
@@ -58,8 +61,13 @@ const MovieDetailsPage = () => {
           <div className={s.imgWrapper}>
             <img
               className={s.moviePoster}
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              alt={movie.title}
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                  : defaultImg
+              }
+              width={450}
+              alt="poster"
             />
           </div>
           <div className={s.movieDetails}>

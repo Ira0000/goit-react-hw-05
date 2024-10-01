@@ -10,6 +10,9 @@ const MovieCast = () => {
   const [cast, setCast] = useState(null);
   const [isError, setIsError] = useState(false);
 
+  const defaultImg =
+    "https://dummyimage.com/400x600/cdcdcd/000.jpg&text=No+poster";
+
   useEffect(() => {
     const fetchCast = async () => {
       try {
@@ -37,7 +40,13 @@ const MovieCast = () => {
           <li key={member.id} className={s.castMember}>
             <img
               className={s.memberImg}
-              src={`https://image.tmdb.org/t/p/w500${member.profile_path}`}
+              width={60}
+              src={
+                member.profile_path
+                  ? `https://image.tmdb.org/t/p/w500${member.profile_path}`
+                  : defaultImg
+              }
+              alt={member.name}
             />
             <p className={s.memberName}>{member.name}</p>
             <p className={s.characterName}>Character: {member.character}</p>

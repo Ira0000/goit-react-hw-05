@@ -36,10 +36,6 @@ const MoviesPage = () => {
     setSearchParams(searchParams);
   };
 
-  // if (!query == "") {
-
-  // }
-
   useEffect(() => {
     const fetchMovies = async () => {
       try {
