@@ -1,4 +1,5 @@
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { fetchMoviesByQuery } from "../../services/api";
@@ -15,6 +16,13 @@ const MoviesPage = () => {
   const initialValues = {
     query: "",
   };
+  const FeedbackSchema = Yup.object().shape({
+    query: Yup.string()
+      .min(3, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+  });
+
   const handleSubmit = (values) => {
     handleChangeQuery(values.query);
   };
@@ -27,6 +35,10 @@ const MoviesPage = () => {
     searchParams.set("query", newQuery);
     setSearchParams(searchParams);
   };
+
+  // if (!query == "") {
+
+  // }
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -48,16 +60,24 @@ const MoviesPage = () => {
 
   return (
     <div>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validationSchema={FeedbackSchema}
+      >
         <Form className={s.searchForm}>
-          <Field name="query" className={s.searchField} />
-          <hr className={s.line} />
-          <button type="submit" className={s.searchBtn}>
-            <FaMagnifyingGlass className={s.searchIcon} />
-          </button>
+          <div className={s.searchFieldWrapper}>
+            <Field name="query" className={s.searchField} />
+            <hr className={s.line} />
+            <button type="submit" className={s.searchBtn}>
+              <FaMagnifyingGlass className={s.searchIcon} />
+            </button>
+          </div>
+          <ErrorMessage name="query">
+            {(msg) => <div className={s.error}>{msg}</div>}
+          </ErrorMessage>
         </Form>
       </Formik>
-
       <MovieList
         movies={searchMovies}
         isLoading={isLoading}

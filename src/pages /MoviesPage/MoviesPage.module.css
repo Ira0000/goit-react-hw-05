@@ -1,15 +1,20 @@
 .searchForm {
   display: flex;
-  margin-left: 55px;
-  background-color: #eea3a1;
-  width: 320px;
-  border-radius: 8px;
-  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  flex-direction: column;
   margin-bottom: 25px;
+  margin-left: 55px;
 }
 
-.searchForm:hover,
-.searchForm:active {
+.searchFieldWrapper {
+  display: flex;
+  background-color: #eea3a1;
+  width: 343px;
+  border-radius: 8px;
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.searchFieldWrapper:hover,
+.searchFieldWrapper:active {
   border: 1px solid #8c587d;
 }
 
@@ -43,11 +48,8 @@
 
 .line {
   border-color: #8c587d;
-  /* color: white; */
-  /* box-shadow: none; */
   margin-left: 0;
   margin-right: 0;
-  /* rotate: 50%; */
 }
 
 .searchBtn:hover > .searchIcon {
@@ -57,4 +59,9 @@
 .searchIcon {
   fill: #8c587d;
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.error {
+  color: red;
+  font-size: 12px;
 }

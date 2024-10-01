@@ -37,7 +37,7 @@ const MovieDetailsPage = () => {
   const buildLinkClass = ({ isActive }) => {
     return clsx(s.link, isActive && s.active);
   };
-  const goBackRef = useRef(location.state ?? "/");
+  const goBackRef = useRef(location.state ?? "/movies");
   if (!movie) return <Loader />;
   const movieReleaseYear = movie.release_date.substring(0, 4);
   const movieScore = Math.round(movie.vote_average * 10);

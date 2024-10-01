@@ -27,7 +27,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <h2 className={s.title}>Trending Today</h2>
+      <h2 className={s.title}>Movies Trending Today</h2>
       <MovieList
         movies={trendingMovies}
         isLoading={isLoading}
