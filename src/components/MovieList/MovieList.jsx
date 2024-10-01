@@ -1,45 +1,23 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { fetchTrendingMovies } from "../../services/api";
 import s from "./MovieList.module.css";
 import Loader from "../Loader/Loader";
 
-const MovieList = () => {
-  const [trendingMovies, setTrendingMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        setIsError(false);
-        setIsLoading(true);
-        const data = await fetchTrendingMovies();
-        setTrendingMovies(data);
-        // console.log(data);
-      } catch {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchMovies();
-  }, []);
+const MovieList = ({ movies, isLoading, isError }) => {
   return (
-    <div className={s.trendingMoviesWrapper}>
-      <h2 className={s.title}>Trending Today</h2>
+    <div className={s.moviesWrapper}>
       {isLoading && <Loader />}
-
+      {isError && (
+        <h2>
+          Something went wrong! <br /> Please try again later!
+        </h2>
+      )}
       <ul className={s.movieList}>
-        {trendingMovies?.map((trendingMovie) => (
-          <li
-            key={trendingMovie.id}
-            // id={trendingMovie.id}
-            className={s.movieItem}
-          >
-            <Link to={`/movies/${trendingMovie.id.toString()}`}>
-              <p>{trendingMovie.title}</p>
+        {movies?.map((movie) => (
+          <li key={movie.id} className={s.movieItem}>
+            <Link to={`/movies/${movie.id.toString()}`}>
+              <p>
+                {movie.title} ({movie.release_date.substring(0, 4)})
+              </p>
             </Link>
           </li>
         ))}

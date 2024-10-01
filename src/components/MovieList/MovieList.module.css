@@ -1,11 +1,5 @@
-.trendingMoviesWrapper {
+.moviesWrapper {
   padding-left: 55px;
-}
-
-.title {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 40px;
 }
 
 .movieList {

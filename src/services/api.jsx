@@ -1,7 +1,4 @@
 import axios from "axios";
-
-const trendingMoviesUrl = "https://api.themoviedb.org/3/trending/movie/day";
-
 const options = {
   headers: {
     accept: "application/json",
@@ -11,6 +8,7 @@ const options = {
 };
 
 export const fetchTrendingMovies = async () => {
+  const trendingMoviesUrl = "https://api.themoviedb.org/3/trending/movie/day";
   const { data } = await axios.get(trendingMoviesUrl, options);
   return data.results;
 };
@@ -30,5 +28,11 @@ export const fetchMovieCastById = async (movieId) => {
 export const fetchMovieReviewsById = async (movieId) => {
   const movieReviewUrl = `https://api.themoviedb.org/3/movie/${movieId}/reviews`;
   const { data } = await axios.get(movieReviewUrl, options);
+  return data.results;
+};
+
+export const fetchMoviesByQuery = async (query) => {
+  const searchMovieUrl = `https://api.themoviedb.org/3/search/movie?query=${query}&language=en-US&page=1`;
+  const { data } = await axios.get(searchMovieUrl, options);
   return data.results;
 };
