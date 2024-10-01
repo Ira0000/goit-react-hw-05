@@ -3,36 +3,39 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { fetchMoviesByQuery } from "../../services/api";
 import MovieList from "../../components/MovieList/MovieList";
+import s from "./MoviesPage.module.css";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 
 const MoviesPage = () => {
-  // const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [searchMovies, setSearchMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [query, setQuery] = useState("");
 
   const initialValues = {
     query: "",
   };
   const handleSubmit = (values) => {
-    console.log(values.query);
-    setQuery(values.query);
-    // handleChangeQuery(values.query);
+    handleChangeQuery(values.query);
   };
-  // const query = searchParams.get("query") ?? "";
-  // const handleChangeQuery = (newQuery) => {
-  //   if (!newQuery) {
-  //     return setSearchParams({});
-  //   }
+
+  const query = searchParams.get("query") ?? "";
+  const handleChangeQuery = (newQuery) => {
+    if (!newQuery) {
+      return setSearchParams({});
+    }
+    searchParams.set("query", newQuery);
+    setSearchParams(searchParams);
+  };
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
         setIsError(false);
         setIsLoading(true);
+        if (!query) return;
         const data = await fetchMoviesByQuery(query);
         setSearchMovies(data);
-        console.log(data);
       } catch {
         setIsError(true);
       } finally {
@@ -43,16 +46,15 @@ const MoviesPage = () => {
     fetchMovies();
   }, [query]);
 
-  //   searchParams.set("query", newQuery);
-  //   setSearchParams(searchParams);
-  // };
-
   return (
     <div>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        <Form>
-          <Field name="query" />
-          <button type="submit">Search</button>
+        <Form className={s.searchForm}>
+          <Field name="query" className={s.searchField} />
+          <hr className={s.line} />
+          <button type="submit" className={s.searchBtn}>
+            <FaMagnifyingGlass className={s.searchIcon} />
+          </button>
         </Form>
       </Formik>
 

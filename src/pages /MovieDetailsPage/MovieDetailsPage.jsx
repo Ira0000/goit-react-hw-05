@@ -1,5 +1,11 @@
-import { useEffect, useState } from "react";
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import { fetchMovieById } from "../../services/api";
 import Loader from "../../components/Loader/Loader";
 import s from "./MovieDetailsPage.module.css";
@@ -7,10 +13,10 @@ import clsx from "clsx";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
-  // console.log(movieId);
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -19,7 +25,6 @@ const MovieDetailsPage = () => {
         setIsLoading(true);
         const data = await fetchMovieById(movieId);
         setMovie(data);
-        // console.log(data);
       } catch {
         setIsError(true);
       } finally {
@@ -32,15 +37,22 @@ const MovieDetailsPage = () => {
   const buildLinkClass = ({ isActive }) => {
     return clsx(s.link, isActive && s.active);
   };
+  const goBackRef = useRef(location.state ?? "/");
   if (!movie) return <Loader />;
   const movieReleaseYear = movie.release_date.substring(0, 4);
   const movieScore = Math.round(movie.vote_average * 10);
+
   return (
     <div className={s.pageWrapper}>
-      <button type="button" className={s.returnBtn}>
-        Go Back
-      </button>
+      <Link to={goBackRef.current} className={s.return}>
+        Go back
+      </Link>
       {isLoading && <Loader />}
+      {isError && (
+        <h2>
+          Something went wrong! <br /> Please try again later!
+        </h2>
+      )}
       <div className={s.movieDetailsWrapper}>
         <div className={s.infoWrapper}>
           <div className={s.imgWrapper}>

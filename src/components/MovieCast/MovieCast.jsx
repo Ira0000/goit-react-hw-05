@@ -7,7 +7,6 @@ import s from "./MovieCast.module.css";
 
 const MovieCast = () => {
   const { movieId } = useParams();
-  // console.log(movieId);
   const [cast, setCast] = useState(null);
   const [isError, setIsError] = useState(false);
 
@@ -17,7 +16,6 @@ const MovieCast = () => {
         setIsError(false);
         const data = await fetchMovieCastById(movieId);
         setCast(data);
-        // console.log(data);
       } catch {
         setIsError(true);
       }
@@ -29,6 +27,11 @@ const MovieCast = () => {
   return (
     <div>
       <h3 className={s.castTitle}>Movie Cast</h3>
+      {isError && (
+        <h2>
+          Something went wrong! <br /> Please try again later!
+        </h2>
+      )}
       <ul className={s.castList}>
         {cast.slice(0, 5)?.map((member) => (
           <li key={member.id} className={s.castMember}>

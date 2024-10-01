@@ -16,7 +16,6 @@ const MovieReviews = () => {
 
         const data = await fetchMovieReviewsById(movieId);
         setReviews(data);
-        console.log(data);
       } catch {
         setIsError(true);
       }
@@ -28,6 +27,11 @@ const MovieReviews = () => {
   return (
     <div>
       <h3 className={s.reviewTitle}>Movie Reviews</h3>
+      {isError && (
+        <h2>
+          Something went wrong! <br /> Please try again later!
+        </h2>
+      )}
       {reviews.length != 0 ? (
         <ul className={s.reviewList}>
           {reviews?.map((review) => (
