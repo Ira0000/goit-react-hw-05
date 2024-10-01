@@ -12,6 +12,7 @@ const MoviesPage = () => {
   const [searchMovies, setSearchMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isEmpty, setisEmpty] = useState(false);
 
   const initialValues = {
     query: "",
@@ -39,11 +40,15 @@ const MoviesPage = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
+        setisEmpty(false);
         setIsError(false);
         setIsLoading(true);
         if (!query) return;
         const data = await fetchMoviesByQuery(query);
         setSearchMovies(data);
+        if (data.length === 0) {
+          setisEmpty(true);
+        }
       } catch {
         setIsError(true);
       } finally {
@@ -74,6 +79,7 @@ const MoviesPage = () => {
           </ErrorMessage>
         </Form>
       </Formik>
+      {isEmpty && <h2>Sorry, we could not find such movie!</h2>}
       <MovieList
         movies={searchMovies}
         isLoading={isLoading}
